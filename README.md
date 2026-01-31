@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Recipe Blog Platform
+A high-performance, multilingual recipe blog built with Next.js, Tailwind CSS, and Contentful CMS. This project demonstrates advanced frontend architecture, including Static Site Generation (SSG), localized routing, and containerized deployment.
 
-## Getting Started
+🚀 Features
+Static Site Generation (SSG): All recipe pages and the homepage are pre-rendered at build time for optimal SEO and performance.
 
-First, run the development server:
+Multilingual Support (i18n): Full support for English, Spanish, and French with localized routing (e.g., /en, /es, /fr).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Dynamic Sitemap: Automatically generated sitemap.xml including all localized alternative URLs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Newsletter Integration: A functional subscription form with client-side validation and success state handling.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Responsive Design: A mobile-first UI built with Tailwind CSS that supports high-resolution image optimization.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Print Optimization: Custom CSS media queries to ensure recipes are print-friendly by hiding navigation and UI elements.
 
-## Learn More
+🛠️ Tech Stack
+Framework: Next.js 15+ (Pages Router)
 
-To learn more about Next.js, take a look at the following resources:
+Styling: Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Internationalization: next-i18next
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deployment: Docker & Docker Compose
 
-## Deploy on Vercel
+CMS: Contentful (or equivalent)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🐳 Docker Setup
+The application is fully containerized. To run the project locally:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Environment Variables: Create a .env.local based on .env.example.
+
+Build and Run:
+
+Bash
+docker-compose up --build -d
+Healthcheck: The container includes a built-in healthcheck to ensure the service is live. Verify status with:
+
+Bash
+docker ps
+📋 Solution Architecture
+Static Site Generation
+We utilize getStaticProps to fetch recipe data from the CMS at build time. This ensures the fastest possible Time to First Byte (TTFB) and allows the site to be hosted on any static provider or CDN.
+
+Internationalization Strategy
+Using next-i18next, we implemented a middleware-based localized routing system. This allows for:
+
+Language detection via browser headers.
+
+Localized sub-paths (e.g., /es/recipes/lasagna).
+
+SEO-optimized hreflang tags in the sitemap.
+
+Testing & Quality Assurance
+The project includes mandatory data-testid attributes on critical components (Recipe Cards, Newsletter Form, Language Switcher) to facilitate automated end-to-end testing.
